@@ -796,5 +796,8 @@ export default {
   'Modify task group queue priority': '修改优先级',
   'Force to start task': '强制启动',
   'Priority not empty': '优先级不能为空',
-  'Priority must be number': '优先级必须是数值'
+  'Priority must be number': '优先级必须是数值',
+  'JDBC URL': 'jdbcURL',
+  'Please enter jdbc url': '请输入jdbc连接地址,格式为jdbc:xxx://ip:port/databasename',
+  'JDBC URL error value': '连接字符串格式有误'
 }

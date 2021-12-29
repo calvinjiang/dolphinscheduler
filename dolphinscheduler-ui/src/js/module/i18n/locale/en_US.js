@@ -794,5 +794,8 @@ export default {
   'Task group queue the status of releasing': 'Released',
   'Modify task group queue priority': 'Edit the priority of the task group queue',
   'Priority not empty': 'The value of priority can not be empty',
-  'Priority must be number': 'The value of priority should be number'
+  'Priority must be number': 'The value of priority should be number',
+  'JDBC URL': 'jdbcURL',
+  'Please enter jdbc url': 'Please enter jdbc url,the value like jdbc:xxx://ip:port/databasename',
+  'JDBC URL error value': 'the format of jdbc url is not correct. '
 }

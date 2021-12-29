@@ -51,25 +51,14 @@
           </template>
         </m-list-box-f>
         <m-list-box-f>
-          <template slot="name"><strong>*</strong>{{$t('IP')}}</template>
+          <template slot="name"><strong>*</strong>{{$t('JDBC URL')}}</template>
           <template slot="content">
             <el-input
                     type="input"
-                    v-model="host"
+                    v-model="jdbcUrl"
                     maxlength="255"
                     size="small"
-                    :placeholder="$t('Please enter IP')">
-            </el-input>
-          </template>
-        </m-list-box-f>
-        <m-list-box-f>
-          <template slot="name"><strong>*</strong>{{$t('Port')}}</template>
-          <template slot="content">
-            <el-input
-                    type="input"
-                    v-model="port"
-                    size="small"
-                    :placeholder="$t('Please enter port')">
+                    :placeholder="$t('Please enter jdbc url')">
             </el-input>
           </template>
         </m-list-box-f>
@@ -140,18 +129,6 @@
             </el-input>
           </template>
         </m-list-box-f>
-        <m-list-box-f>
-          <template slot="name"><strong :class="{hidden:showDatabase}">*</strong>{{$t('Database Name')}}</template>
-          <template slot="content">
-            <el-input
-                    type="input"
-                    v-model="database"
-                    maxlength="60"
-                    size="small"
-                    :placeholder="$t('Please enter database name')">
-            </el-input>
-          </template>
-        </m-list-box-f>
         <m-list-box-f v-if="showConnectType">
           <template slot="name"><strong>*</strong>{{$t('Oracle Connect Type')}}</template>
           <template slot="content">
@@ -205,6 +182,8 @@
         host: '',
         // port
         port: '',
+        // jdbc url
+        jdbcUrl: '',
         // data storage name
         database: '',
         // principal
@@ -302,9 +281,7 @@
           type: this.type,
           name: this.name,
           note: this.note,
-          host: this.host,
-          port: this.port,
-          database: this.database,
+          jdbcUrl: this.jdbcUrl,
           principal: this.principal,
           javaSecurityKrb5Conf: this.javaSecurityKrb5Conf,
           loginUserKeytabUsername: this.loginUserKeytabUsername,
@@ -357,12 +334,8 @@
           this.$message.warning(`${i18n.$t('Please enter resource name')}`)
           return false
         }
-        if (!this.host) {
-          this.$message.warning(`${i18n.$t('Please enter IP/hostname')}`)
-          return false
-        }
-        if (!this.port) {
-          this.$message.warning(`${i18n.$t('Please enter port')}`)
+        if (!this.jdbcUrl || this.jdbcUrl.substr(0, 4) !== 'jdbc') {
+          this.$message.warning(`${i18n.$t('Please enter jdbc url')}`)
           return false
         }
         if (!this.userName) {
@@ -370,10 +343,6 @@
           return false
         }
 
-        if (!this.database && this.showDatabase === false) {
-          this.$message.warning(`${i18n.$t('Please enter database name')}`)
-          return false
-        }
         if (this.other) {
           if (!isJson(this.other)) {
             this.$message.warning(`${i18n.$t('jdbc connection parameters is not a correct JSON format')}`)
