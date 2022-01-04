@@ -15,10 +15,21 @@
  * limitations under the License.
  */
 
+<<<<<<< HEAD
 import type { RouteRecordRaw } from "vue-router";
 import type { Component } from "vue";
 import utils from "@/utils";
 import { useI18n } from "vue-i18n";
+=======
+import type { RouteRecordRaw } from 'vue-router'
+import type { Component } from 'vue'
+import utils from '@/utils'
+import projectsPage from './modules/projects'
+import resourcesPage from './modules/resources'
+import datasourcePage from './modules/datasource'
+import monitorPage from './modules/monitor'
+import securityPage from './modules/security'
+>>>>>>> dev
 
 // All TSX files under the views folder automatically generate mapping relationship
 const modules = import.meta.glob("/src/views/**/**.tsx");
@@ -29,6 +40,7 @@ const components: { [key: string]: Component } = utils.mapping(modules);
  */
 const basePage: RouteRecordRaw[] = [
   {
+<<<<<<< HEAD
     path: "/",
     redirect: { name: "home" },
     meta: { title: "首页" },
@@ -40,10 +52,24 @@ const basePage: RouteRecordRaw[] = [
         component: components["home"],
         meta: {
           title: "首页",
+=======
+    path: '/',
+    redirect: { name: 'home' },
+    meta: { title: '首页' },
+    component: () => import('@/layouts/content'),
+    children: [
+      {
+        path: '/home',
+        name: 'home',
+        component: components['home'],
+        meta: {
+          title: '首页',
+>>>>>>> dev
         },
       },
     ],
   },
+<<<<<<< HEAD
 ];
 
 const projectsPage = [
@@ -177,6 +203,14 @@ const securityPage: RouteRecordRaw[] = [
     ],
   },
 ];
+=======
+  projectsPage,
+  resourcesPage,
+  datasourcePage,
+  monitorPage,
+  securityPage,
+]
+>>>>>>> dev
 
 /**
  * Login page
