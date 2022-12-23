@@ -615,4 +615,34 @@ public class UsersController extends BaseController {
         Map<String, Object> result = usersService.batchActivateUser(loginUser, formatUserNames);
         return returnDataList(result);
     }
+
+    /**
+     * reset user password
+     *
+     * @param loginUser login user
+     * @param id user id
+     * @param userPassword user password
+     * @return update result code
+     */
+    @Operation(summary = "resetPassword", description = "UPDATE_USER_NOTES")
+    @Parameters({
+        @Parameter(name = "id", description = "USER_ID", required = true, schema = @Schema(implementation = int.class, example = "100")),
+        @Parameter(name = "userName", description = "USER_NAME", required = true, schema = @Schema(implementation = String.class)),
+        @Parameter(name = "userPassword", description = "USER_PASSWORD", required = true, schema = @Schema(implementation = String.class)),
+        @Parameter(name = "tenantId", description = "TENANT_ID", required = true, schema = @Schema(implementation = int.class, example = "100")),
+        @Parameter(name = "queue", description = "QUEUE", schema = @Schema(implementation = String.class)),
+        @Parameter(name = "email", description = "EMAIL", required = true, schema = @Schema(implementation = String.class)),
+        @Parameter(name = "phone", description = "PHONE", schema = @Schema(implementation = String.class)),
+        @Parameter(name = "state", description = "STATE", schema = @Schema(implementation = int.class, example = "1"))
+    })
+    @PostMapping(value = "/resetPassword")
+    @ResponseStatus(HttpStatus.OK)
+    @ApiException(UPDATE_USER_ERROR)
+    @AccessLogAnnotation(ignoreRequestArgs = {"loginUser", "userPassword"})
+    public Result resetPassword(@Parameter(hidden = true) @RequestAttribute(value = Constants.SESSION_USER) User loginUser,
+        @RequestParam(value = "id") int id,
+        @RequestParam(value = "userPassword") String userPassword) throws Exception {
+        Map<String, Object> result = usersService.resetPassword(loginUser, id, userPassword);
+        return returnDataList(result);
+    }
 }

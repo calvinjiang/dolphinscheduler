@@ -1465,4 +1465,18 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
         user = userMapper.queryDetailsById(user.getId());
         return user;
     }
+
+    /**
+     * reset user's password
+     *
+     * @param loginUser
+     * @param userId
+     * @param userPassword
+     * @return reset password result code
+     */
+    @Override
+    public Map<String, Object> resetPassword(User loginUser, int userId, String userPassword)
+        throws IOException {
+        return null;
+    }
 }

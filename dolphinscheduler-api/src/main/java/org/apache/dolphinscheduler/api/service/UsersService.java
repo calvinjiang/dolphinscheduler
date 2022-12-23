@@ -328,4 +328,13 @@ public interface UsersService {
     User createUserIfNotExists(String userName, String userPassword, String email, String phone, String tenantCode,
                                String queue,
                                int state) throws IOException;
+
+    /**
+     * reset user's password
+     * @param loginUser
+     * @param userId
+     * @param userPassword
+     * @return reset password result code
+     */
+    Map<String, Object> resetPassword(User loginUser, int userId, String userPassword) throws IOException;
 }
